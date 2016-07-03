@@ -31,8 +31,6 @@ Issues
 
 6. It seams the Pulse and Oxygen sensor does not reach the needed level of quality to provide a sufficient measurment.
 
-7. Lags and minor artifacts during the measurement with Arduino based setup.
-
 
 ### Olimex SHIELD-EKG-EMG
 
@@ -50,3 +48,4 @@ Things to consider for future developmnent:
 
 3. Measurements with a defined intervall, e.g. 100 ms for all sensors.
 
+7. Analyse lags and minor artifacts during the measurement with Arduino based setup and tty logging on a Raspberry PI.
