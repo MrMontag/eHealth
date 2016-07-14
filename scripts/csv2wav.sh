@@ -13,13 +13,8 @@
 #
 # Copyright (C)    2016  Alexander (MrMontag) Fust <MrMontagOpenDev@gmail.com>
 #
-# This script creates mp4 files for all h264 videos contained in a folder
-# and it's subdirectories. To run the processing the Open Source multimedia
-# framework GPAC <https://gpac.wp.mines-telecom.fr/> is needed. If it is not
-# yet installed please run the following commands (for Debian based systems).
-#
-#     sudo apt-get update
-#     sudo apt-get install gpac
+# This script creates WAV files based on CSV data contained in a folder
+# and it's subdirectories. 
 #
 #!/bin/bash
     
