@@ -22,16 +22,20 @@ import wave
 import random
 import struct
 import csv
+import os
 
 class DataWav:
     wavOut = None
     values = None
+    targetfile = None
 
     def __init__(self):
         self.values = []
 
-    def open(self, outfile):
-        self.wavOut = wave.open(outfile, 'w')
+    def open(self, prefix, outfile):
+        filename = prefix + '-' + os.path.basename(outfile)
+        self.targetfile = os.path.dirname(outfile) + '/' + filename
+        self.wavOut = wave.open(self.targetfile, 'w')
         # nchannels, sampwidth, framerate, nframes, comptype, compname
         self.wavOut.setparams((1, 1, 44100, 0, 'NONE', 'not compressed'))
 
@@ -40,6 +44,7 @@ class DataWav:
         self.values.append(packed_value)
 
     def close(self):
+        print self.targetfile
         self.wavOut.writeframes(''.join(self.values))
         self.wavOut.close()
 
@@ -48,7 +53,7 @@ def createOutFiles(outfile):
     outFiles = []
     for prefix in prefixes:
         outFile = DataWav()
-        outFile.open(prefix + '-' + outfile)
+        outFile.open(prefix, outfile)
         outFiles.append(outFile)
     return outFiles
 
