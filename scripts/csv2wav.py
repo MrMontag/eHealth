@@ -25,7 +25,10 @@ import csv
 
 class DataWav:
     wavOut = None
-    values = []
+    values = None
+
+    def __init__(self):
+        self.values = []
 
     def open(self, outfile):
         self.wavOut = wave.open(outfile, 'w')
