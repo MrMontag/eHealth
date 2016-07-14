@@ -23,7 +23,7 @@
 #
 #!/bin/bash
     
-find -printf "%p\n" | grep -i .*h264 | while read -r fp
+find -printf "%p\n" | grep -i -e ".*\.h264$" | while read -r fp
 do
     echo "$fp"
     MP4Box -add $fp ${fp/h264/mp4}
