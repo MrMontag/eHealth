@@ -62,6 +62,8 @@ def closeOutFiles(outFiles):
         outFile.close()
 
 def processRow(row, outFiles):
+    if len(row) != 6:
+        return
     for i in range(len(row)):
         outFiles[i].add(row[i])
 
