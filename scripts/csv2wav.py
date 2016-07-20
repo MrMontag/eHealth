@@ -48,40 +48,40 @@ class DataWav:
         self.wavOut.writeframes(''.join(self.values))
         self.wavOut.close()
 
-def createOutFiles(outfile):
+class CsvProcessor:
     prefixes = ['air', 'skin', 'ecg', 'temp', 'bpm', 'oxygen']
-    outFiles = []
-    for prefix in prefixes:
-        outFile = DataWav()
-        outFile.open(prefix, outfile)
-        outFiles.append(outFile)
-    return outFiles
+    outfiles = []
 
-def closeOutFiles(outFiles):
-    for outFile in outFiles:
-        outFile.close()
+    def createOutFiles(self, outfile):
+        for prefix in self.prefixes:
+            of = DataWav()
+            of.open(prefix, outfile)
+            self.outfiles.append(of)
 
-def processRow(row, outFiles):
-    if len(row) != 6:
-        return
-    for i in range(len(row)):
-        outFiles[i].add(row[i])
+    def closeOutFiles(self):
+        for outfile in self.outfiles:
+            outfile.close()
 
-def process(infile, outfile):
-    csvIn = open(infile, 'rb')
-    reader = csv.reader(csvIn, delimiter=';')
-    outFiles = createOutFiles(outfile)
-    for row in reader:
-        processRow(row, outFiles)
-    csvIn.close()
-    closeOutFiles(outFiles)
+    def process(self, row):
+        if len(row) != 6:
+            return
+        for i in range(len(row)):
+            self.outfiles[i].add(row[i])
 
-def main():
+    def run(self, infile, outfile):
+        csvin = open(infile, 'rb')
+        reader = csv.reader(csvin, delimiter=';')
+        self.createOutFiles(outfile)
+        for row in reader:
+            self.process(row)
+        csvin.close()
+        self.closeOutFiles()
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='eHealth csv to wav converter')
     parser.add_argument('inFile')
     parser.add_argument('outFile')
     args = parser.parse_args()
-    process(args.inFile, args.outFile)
-   
-if __name__ == "__main__":
-    main()
+    processor = CsvProcessor()
+    processor.run(args.inFile, args.outFile)
+
