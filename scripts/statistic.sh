@@ -26,7 +26,6 @@ do
         continue
     fi
 
-    wn=""
     dn=$(dirname "$fp")
     readlink -f $dn/*.wav | while read -r fw
     do
@@ -35,12 +34,10 @@ do
             #echo "skip: $fw"
             continue
         else
-            echo "$fw"
-            wn="$bn"
             echo "dir: $dn"
-            echo "csv: $fp"
-            echo "wav: $wn"
-            ./statistic.py "$fp" "$dn/$wn" "$outfile"
+            echo "csv: $cn"
+            echo "wav: $bn"
+            ./statistic.py "$fp" "$dn/$bn" "$outfile"
              echo ""
         fi
     done
