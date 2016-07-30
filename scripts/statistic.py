@@ -68,7 +68,7 @@ class Statistic:
         row.append(wavan.nframes)
         duration = wavan.getduration()
         row.append(duration)
-        row.append(duration/npoints)
+        row.append(npoints/duration)
         return row
 
     def generate(self, incsv, inwav):
